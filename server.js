@@ -21,22 +21,21 @@ app.use(express.static("public"));
 
 // -------------------------------------------------
 
-// MongoDB Configuration configuration (Change this URL to your own DB)
-// mongoose.connect("mongodb://admin:codingrocks@ds023664.mlab.com:23664/reactlocate");
+// MongoDB Configuration configuration 
+if (PORT === 3000) {
+  mongoose.connect("mongodb://localhost/nytreact", {
+    useMongoClient: true
+  });
+} else {
+  mongoose.connect("mongodb://heroku_r02573sn:p38ipse08u3voc2hcf3kdr904k@ds163613.mlab.com:63613/heroku_r02573sn", {
+    useMongoClient:true
+  });
+};
 
-// if (PORT === 3000) {
-//   mongoose.connect("mongodb://localhost/nytreact", {
-//     useMongoClient: true
-//   });
-// } else {
-//   mongoose.connect("mongodb://????", {
-//     useMongoClient:true
-//   });
-// };
+// mongoose.connect("mongodb://localhost/nytreact", {
+//   useMongoClient: true
+// });
 
-mongoose.connect("mongodb://localhost/nytreact", {
-  useMongoClient: true
-});
 var db = mongoose.connection;
 
 db.on("error", function(err) {
